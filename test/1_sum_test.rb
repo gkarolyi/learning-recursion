@@ -28,11 +28,15 @@ class RecursiveSumTest < Minitest::Test
     expected = 1275
     assert_equal(expected, sum(50))
   end
+
+  def test_sum_stack_level
+    assert_raises(SystemStackError) { sum(50_000) }
+  end
 end
 
 class RecursiveSumBenchmark < Minitest::Benchmark
   def self.bench_range
-    [1, 10, 100, 1000]
+    [1, 10, 100, 1000, 5000]
   end
 
   def bench_sum
